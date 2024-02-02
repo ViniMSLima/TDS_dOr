@@ -1,5 +1,5 @@
 
-import arquivo from "../../games/mazejalma.exe"
+import arquivo from "../../games/etsTycoon.zip"
 
 export default function LoginPage() {
     return (

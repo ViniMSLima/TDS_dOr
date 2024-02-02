@@ -12,7 +12,7 @@ function App() {
     <>
       < SideBar/>
       <Routes>
-        <Route path='/home' element={<HomePage />} />
+        <Route path='/home' element={<Download />} />
         <Route path='/game' element={<GameScreen />} />
       </Routes>
     </>

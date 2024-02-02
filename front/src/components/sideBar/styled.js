@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 export const Nav = styled.nav `
     display: inline-block;
 	min-height: 100vh;
-	width: 80px;
+	width: 4vw;
 	background-color: #313443;
 	float: left;
 `;
