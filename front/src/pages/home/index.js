@@ -1,15 +1,18 @@
-import { Container, DivCards, Card, DivColour } from './styled';
+import { Container, DivCards, Card, Text, H1, Img } from './styled';
 
 export default function HomePage() {
     return (
         <>
-            <Container>
+            {/* <Container>
                 <DivCards>
                     <Card>
-                        <DivColour></DivColour>
+                        <Img></Img>
+                        <Text>
+                            <H1>Name</H1>
+                        </Text>
                     </Card>
                 </DivCards>
-            </Container>
+            </Container> */}
         </>
     )
 }

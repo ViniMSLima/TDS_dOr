@@ -2,13 +2,20 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom'
 
 export const Nav = styled.nav `
-    display: flex;
+    display: none;
     flex-direction: column;
     justify-content: center;
-    position: absolute;
+    position: fixed;
 	min-height: 100vh;
 	width: 4vw;
 	background-color: #440046;
+    border-radius: 0 20px 20px 0;
+    @media (
+        min-width: 768px
+    )
+    {
+        display: flex;
+    }
 `;
 
 export const Ul = styled.ul `
@@ -22,7 +29,7 @@ export const Ul = styled.ul `
 `;
 
 export const Li = styled.li `
-	cursor: pointer;
+    cursor: crosshair;
 `;
 
 export const A = styled.a `
