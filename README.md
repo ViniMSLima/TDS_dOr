@@ -17,7 +17,7 @@ FRONT
 
 - [ ] Game Description / Download Screen
 - [ ] Comments
-- [ ] Implement downloads
+- [x] Implement downloads
 
 BACK
 

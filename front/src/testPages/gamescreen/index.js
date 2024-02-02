@@ -1,7 +1,8 @@
 import React from 'react';
-import { Container, Game, GameInfo, Input, Text, GameTitle, GameName, GameRating, GameDescription, RatingSection, RatingLabel, CommentsSection, CommentsLabel, Comment, GameImage, DownloadButton } from './styled';
+import { Container, Game, GameInfo, Input, Text, GameTitle, CommentButton, GameName, GameRating, GameDescription, RatingSection, RatingLabel, CommentsSection, CommentsLabel, Comment, GameImage, DownloadButton } from './styled';
 import game from "../../games/etsTycoon.zip"
 import "./style.css";
+import gameImage from "../../assets/gameImages/ameliaAndTheThirdDimension/logo.png";
 
 function GameScreen() {
   return (
@@ -10,7 +11,7 @@ function GameScreen() {
         <Game>
           <GameInfo>
             <GameTitle>
-              <GameName>Game Name</GameName>
+              <GameName>Amelia and The Third Dimension</GameName>
               <GameRating>9.5</GameRating>
             </GameTitle>
 
@@ -34,19 +35,28 @@ function GameScreen() {
 
             </RatingSection>
           </GameInfo>
-          <GameImage src="https://i.pinimg.com/564x/79/95/eb/7995ebe5a61d943b171d33ac7c73921b.jpg"></GameImage>
+          <div style={{ display: 'flex', flexDirection: 'column', height: '80%'}}>
+            <GameImage src= {gameImage}></GameImage>
+            <a href={game} download>
+              <DownloadButton>DOWNLOAD</DownloadButton>
+            </a>
+          </div>
         </Game>
         <Game>
           <CommentsSection>
-            <CommentsLabel>Comments:</CommentsLabel>
-            <Input></Input>
-            <Comment>This is a great game!</Comment>
-            <Comment>I can't wait for the sequel!</Comment>
-            <Comment>The graphics are amazing.</Comment>
+            <CommentsLabel>COMMENTS</CommentsLabel>
+
+            <div style={{ display: 'flex' }}>
+              <Input />
+              <CommentButton>COMMENT</CommentButton>
+            </div>
+            <div style={{ marginTop: '50px' }}>
+              <Comment>This is a great game!</Comment>
+              <Comment>I can't wait for the sequel!</Comment>
+              <Comment>The graphics are amazing.</Comment>
+            </div>
           </CommentsSection>
-          <a href={game} download>
-            <DownloadButton>DOWNLOAD</DownloadButton>
-          </a>
+
         </Game>
       </Container>
     </>
