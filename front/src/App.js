@@ -10,7 +10,7 @@ import SideBar from './components/sideBar';
 function App() {
   return (
     <>
-      < SideBar/>
+      <SideBar />
       <Routes>
         <Route path='/home' element={<HomePage />} />
         <Route path='/game' element={<GameScreen />} />

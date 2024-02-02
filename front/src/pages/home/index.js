@@ -1,17 +1,15 @@
-import {  } from './styled';
+import { Container, DivCards, Card, DivColour } from './styled';
 
 export default function HomePage() {
     return (
         <>
-            {/* 27 jogos */}
-            
-            <div> {/* container */}
-                <div> {/* cards */}
-                    <div> {/* card */}
-
-                    </div>
-                </div>
-            </div>
+            <Container>
+                <DivCards>
+                    <Card>
+                        <DivColour></DivColour>
+                    </Card>
+                </DivCards>
+            </Container>
         </>
     )
 }
