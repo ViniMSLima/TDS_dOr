@@ -16,6 +16,7 @@ export const Nav = styled.nav `
     {
         display: flex;
     }
+
 `;
 
 export const UlTop = styled.ul `
