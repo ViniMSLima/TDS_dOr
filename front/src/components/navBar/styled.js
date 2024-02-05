@@ -6,6 +6,7 @@ export const Nav = styled.nav `
     background-color: #440046;
     justify-content: space-between;
     border-radius: 0px 0px 20px 20px;
+    
     @media (
         max-width: 768px
     )

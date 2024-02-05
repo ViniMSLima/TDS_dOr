@@ -1,6 +1,6 @@
 import { Nav, UlTop, UlMid, UlBott, Li, A, Img, ImgLogo, Span } from './styled';
 import { useState } from "react";
-import { Outlet, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import etsIcon from '../../assets/siteImages/icons/ets.png';
 import gameIcon from '../../assets/siteImages/icons/home.png';
 import logoutIcon from '../../assets/siteImages/icons/logout.png';
