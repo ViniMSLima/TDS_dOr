@@ -5,7 +5,6 @@ export const Container = styled.div`
   flex-direction: column;
   align-items: center;
   padding: 20px;
-  background-color: black;
   height: 100vh;
   color: white;
   background-image: url("https://images.alphacoders.com/134/1341414.png");
@@ -19,8 +18,14 @@ export const Game = styled.div`
   flex-direction: row;
   align-items: center;
   margin: 20px;
-  height: 70vh;
   width: 100vw;
+  gap: 2rem;
+
+  @media (max-width: 1024px) {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
 
 `;
 
@@ -28,7 +33,7 @@ export const GameInfo = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 50%;
+  width: 100%;
 
 `;
 
@@ -36,9 +41,8 @@ export const GameName = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
-  width: 60%;
+  width: 100%;
   font-size: 7vh;
-  margin-left: 12px;
   text-align: center;
 
 `;
@@ -48,15 +52,12 @@ export const GameTitle = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
-  grid-gap: 3vw;
   height: 30vh;
-
+  width: 90%;
 `;
 
 export const GameRating = styled.div`
-  font-size: 18px;
-  margin-bottom: 10px;
-  font-size: 7vw;
+  margin: auto;
   font-size: 8vw;
 `;
 
@@ -69,9 +70,10 @@ export const GameDescription = styled.div`
   margin-bottom: 20px;
   width: 80%;
   text-align: center;
-  background-color: #313443;
+  background: transparent;
+  backdrop-filter: blur(10px);
   border-radius: 15px;
-  box-shadow: 5px 5px #7a1879;
+  box-shadow: 5px 5px 5px #7a1879;
 `;
 
 export const RatingSection = styled.div`
@@ -92,6 +94,10 @@ export const CommentsSection = styled.div`
   flex-direction: column;
   align-items: center;
   width: 50%;
+
+  @media (max-width: 768px) {
+    width: 75%;
+  }
 `;
 
 export const CommentsLabel = styled.div`
@@ -116,25 +122,33 @@ export const Comment = styled.div`
     background-color: #7a1879;
   }
 
+  @media (max-width: 768px) {
+    width: 100%;
+  }
+
 `;
 
 export const GameImage = styled.img`
-  width: 35vw;
-  height: 100%;
+  width: 30vw;
+  height: 80%;
   object-fit: auto;
   border-radius: 15px;
   box-shadow: 5px 5px #7a1879;
   margin-bottom: 30px;
 
+  @media (max-width: 768px) {
+    width: 55vw;
+  }
+
 `;
 
 export const DownloadButton = styled.button`
   height: 15vh;
-  width: 35vw;
+  width: 100%;
   border-radius: 15px;
   background-color: #6c126c;
   color: white;
-  font-size: 2vw;
+  font-size: 18px;
   font-weight: 700;
   
   &:hover {
@@ -145,12 +159,13 @@ export const DownloadButton = styled.button`
 
 export const CommentButton = styled.button`
   height: 6vh;
-  width: 6vw;
+  width: 100%;
   border-radius: 15px;
   background-color: #6c126c;
   color: white;
   font-size: 1.8vh;
   font-weight: 700;
+  margin-bottom: 1rem;
   
   &:hover {
     background-color: #7a1879;
@@ -160,12 +175,25 @@ export const CommentButton = styled.button`
 
 export const Input = styled.textarea`
   height: 6vh;
-  width: 33vw;
-  margin-right: 10px;
+  width: 100%;
   border-radius: 15px;
   background-color: #313443;
   color: white;
   font-size: 2vh;
   font-weight: 700;
-  
+  @media (max-width: 768px) {
+    width: 100%;
+  }
 `;
+
+export const TextArea = styled.div `
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  width: 75%;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    width: 75%;
+  }
+`
