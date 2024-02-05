@@ -15,7 +15,7 @@ const GameSchema = new mongoose.Schema({
     required: true,
     minlength: 3,
   },
-  rate: {
+  rating: {
     type: Number,
     required: false,
   },
