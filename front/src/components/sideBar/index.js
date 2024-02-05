@@ -1,9 +1,10 @@
-import { Nav, Ul, Li, A, Img, Span } from './styled';
+import { Nav, UlTop, UlMid, UlBott, Li, A, Img, ImgLogo, Span } from './styled';
 import { useState } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
-import gameIcon from '../../assets/siteImages/icons/home.png'
-import logoutIcon from '../../assets/siteImages/icons/logout.png'
-import profileIcon from '../../assets/siteImages/icons/profile.png'
+import etsIcon from '../../assets/siteImages/icons/ets.png';
+import gameIcon from '../../assets/siteImages/icons/home.png';
+import logoutIcon from '../../assets/siteImages/icons/logout.png';
+import profileIcon from '../../assets/siteImages/icons/profile.png';
 
 export default function SideBar() {
     const [mouseOverGames, setMouseOverGames] = useState(false);
@@ -30,7 +31,12 @@ export default function SideBar() {
     return (
         <>
             <Nav>
-                <Ul>
+                <UlTop>
+                    <Li>
+                        <A><ImgLogo src={etsIcon}></ImgLogo></A>
+                    </Li>
+                </UlTop>
+                <UlMid>
                     <Li>
                         <A onMouseOver={handleMouseOverGames} onMouseLeave={handleMouseOverGames} onClick={() => navigate('/home')}><Img src={gameIcon}></Img></A>
                         <Span mouseOver={mouseOverGames}>Games</Span>
@@ -39,11 +45,13 @@ export default function SideBar() {
                         <A onMouseOver={handleMouseOverProfile} onMouseLeave={handleMouseOverProfile} onClick={() => navigate('/home')}><Img src={profileIcon}></Img></A>
                         <Span mouseOver={mouseOverProfile}>Descriptions</Span>
                     </Li>
+                </UlMid>
+                <UlBott>
                     <Li>
                         <A onMouseOver={handleMouseOverLogout} onMouseLeave={handleMouseOverLogout} onClick={() => navigate('/home')}><Img src={logoutIcon}></Img></A>
                         <Span mouseOver={mouseOverLogout}>Logout</Span>
                     </Li>
-                </Ul>
+                </UlBott>
             </Nav>
         </>
     )
