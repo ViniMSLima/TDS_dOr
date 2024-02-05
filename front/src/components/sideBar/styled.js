@@ -75,7 +75,6 @@ export const Span = styled.span `
     padding: 8px 15px;
     margin-top: -43px;
     font-size: 13px;
-    position: absolute;
     left: 90px;
-    border-radius: 10px;
+    border-radius: 10px;  
 `;

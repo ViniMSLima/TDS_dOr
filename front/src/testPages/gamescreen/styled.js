@@ -7,8 +7,10 @@ export const Container = styled.div`
   padding: 20px;
   height: 100vh;
   color: white;
-  background-image: url("https://images.alphacoders.com/134/1341414.png");
+  background-image: url(${props => props.src});
   background-attachment: fixed;
+  background-size: cover;
+  background-position: center center;
   overflow-x: hidden;
 
 `;
@@ -68,7 +70,7 @@ export const Text = styled.div`
 export const GameDescription = styled.div`
   font-size: 18px;
   margin-bottom: 20px;
-  width: 80%;
+  width: 75%;
   text-align: center;
   background: transparent;
   backdrop-filter: blur(10px);
@@ -135,11 +137,11 @@ export const GameImage = styled.img`
   border-radius: 15px;
   box-shadow: 5px 5px #7a1879;
   margin-bottom: 30px;
+  image-rendering: pixelated;
 
   @media (max-width: 768px) {
     width: 55vw;
   }
-
 `;
 
 export const DownloadButton = styled.button`
