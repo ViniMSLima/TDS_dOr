@@ -1,14 +1,21 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Container, Game, GameInfo, Input, Text, GameTitle, CommentButton, GameName, GameRating, GameDescription, RatingSection, RatingLabel, CommentsSection, CommentsLabel, Comment, GameImage, DownloadButton, TextArea } from './styled';
 import game from "../../games/etsTycoon.zip"
 import "./style.css";
 import gameImage from "../../assets/gameImages/ameliaAndTheThirdDimension/logo.png";
+import gameBackground from "../../assets/gameImages/ameliaAndTheThirdDimension/bg0.png";
 import { Void } from '../../components/common/styled';
 
 function GameScreen() {
+  const [ images, setImages ] = useState([])
+
+  useEffect(() => {
+    setImages([gameBackground, gameImage])
+  }, [])
+
   return (
     <>
-      <Container>
+      <Container src={images[0]}>
         <Game>
           <GameInfo>
             <GameTitle>
@@ -38,7 +45,7 @@ function GameScreen() {
           </GameInfo>
           <Void/>
           <div style={{ display: 'flex', flexDirection: 'column', height: '80%'}}>
-            <GameImage src= {gameImage}></GameImage>
+            <GameImage src= {images[1]}></GameImage>
             <a href={game} download>
               <DownloadButton>DOWNLOAD</DownloadButton>
             </a>
