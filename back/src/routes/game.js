@@ -4,5 +4,6 @@ const router = express.Router();
 
 router
   .post("/create", GameController.create)
+  .get("/get", GameController.get)
   
 module.exports = router;
