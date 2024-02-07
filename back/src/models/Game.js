@@ -1,51 +1,14 @@
 const mongoose = require("mongoose");
 
 const GameSchema = new mongoose.Schema({
-  name: {
-    type: String,
-    required: true,
-    minlength: 3,
-  },
-  release: {
-    type: Date,
-    required: true,
-  },
-  description: {
-    type: String,
-    required: true,
-    minlength: 3,
-  },
-  imgPath: {
-    type: String,
-    required: true,
-    minlength: 3,
-  },
-  bgPath: {
-    type: String,
-    required: true,
-    minlength: 3,
-  },
-  gamePath: {
-    type: String,
-    required: true,
-    minlength: 3,
-  },
-  rating: {
-    type: Number,
-    required: false,
-  },
-  createdAt: {
-    type: Date,
-    required: true,
-  },
-  updatedAt: {
-    type: Date,
-    required: false,
-  },
-  removedAt: {
-    type: Date,
-    required: false,
-  },
+  name: { type: String, required: true },
+  description: { type: String, required: true },
+  rating: { type: Number, required: true },
+  imgPath: { type: String, required: true },
+  bgPath: { type: String, required: true },
+  gamePath: { type: String, required: false },
+  release: { type: Date, default: Date.now },
+  createdAt: { type: Date, default: Date.now },
 });
 
 const Game = mongoose.model("Game", GameSchema);
