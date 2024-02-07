@@ -15,6 +15,21 @@ const GameSchema = new mongoose.Schema({
     required: true,
     minlength: 3,
   },
+  imgPath: {
+    type: String,
+    required: true,
+    minlength: 3,
+  },
+  bgPath: {
+    type: String,
+    required: true,
+    minlength: 3,
+  },
+  gamePath: {
+    type: String,
+    required: true,
+    minlength: 3,
+  },
   rating: {
     type: Number,
     required: false,
