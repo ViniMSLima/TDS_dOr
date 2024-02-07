@@ -14,7 +14,8 @@ function App() {
       <SideBar />
       <NavBar />
       <Routes>
-        <Route path='/home' element={<Download />} />
+        <Route path='/home' element={<HomePage />} />
+        <Route path='/download' element={<Download />} />
         <Route path='/game' element={<GameScreen />} />
       </Routes>
     </>
