@@ -1,7 +1,17 @@
 const mongoose = require("mongoose");
 
 const UserSchema = new mongoose.Schema({
+  email: {
+    type: String,
+    required: true,
+    minlength: 3,
+  },
   name: {
+    type: String,
+    required: true,
+    minlength: 3,
+  },
+  cpf: {
     type: String,
     required: true,
     minlength: 3,
@@ -9,11 +19,6 @@ const UserSchema = new mongoose.Schema({
   birth: {
     type: Date,
     required: true,
-  },
-  email: {
-    type: String,
-    required: true,
-    minlength: 3,
   },
   password: {
     type: String,

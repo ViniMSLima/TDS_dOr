@@ -11,7 +11,7 @@ class UserController {
     // const decryptd = bytes.toString(CryptoJS.enc.Utf8);
     // const json = JSON.parse(decryptd);
 
-    const { name, birth, email, password, confirmPassword, isAdm } = req.body;
+    const {email, name, cpf, birth, password, confirmPassword, isAdm } = req.body;
 
     if (!name) return res.status(400).json({ message: "Name is mandatory" });
 
