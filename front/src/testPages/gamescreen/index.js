@@ -2,7 +2,7 @@ import React from 'react';
 import { Container, Game, GameInfo, Input, Text, GameTitle, CommentButton, GameName, GameRating, GameDescription, RatingSection, RatingLabel, CommentsSection, CommentsLabel, Comment, GameImage, DownloadButton } from './styled';
 import game from "../../games/etsTycoon.zip"
 import "./style.css";
-import gameImage from "../../assets/gameImages/ameliaAndTheThirdDimension/logo.png";
+import gameImage from "../../assets/gameImages/logoAmelia.png";
 
 function GameScreen() {
   return (
