@@ -3,9 +3,9 @@
 FRONT
 
 - [ ] Translate
-- [ ] Home Screen
+- [X] Home Screen
 - [ ] Ratings
-- [ ] Sidebar
+- [X] Sidebar
 
 BACK
 
