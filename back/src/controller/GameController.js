@@ -1,4 +1,6 @@
 const { Game } = require("../models/Game");
+const express = require('express');
+const router = express.Router();
 require("dotenv").config();
 
 class GameController {
@@ -28,11 +30,11 @@ class GameController {
     }
 
     static async get(req, res) {
-        const { id } = req.body;
+        const { id } = req.query;
 
         try {
             const game = await Game.findById(id);
-            return res.status(200).send(game);
+            return res.status(200).send({game});
         } catch (error) {
             return res.status(404).send({ error: "Game not found!" });
         }
