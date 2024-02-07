@@ -1,30 +1,81 @@
 import styled from 'styled-components';
 
-export const Container = styled.div `
-    background-color: #6c126c;
+export const Container = styled.div`
+    background-color: #11001c;
     min-height: 100vh;
+    overflow-x: hidden;
 `;
 
-export const DivCards = styled.div `
-    /* display: flex; */
+export const Row = styled.div`
+    margin: 0 -5px;
+
+    ::after {
+        content: "";
+        display: table;
+        clear: both;
+    }
 `;
 
-export const Card = styled.div `
+export const Column = styled.div`
+    float: left;
+    margin-left: 8%;
+    margin-top: 2%;
+    display: flex;
+    justify-content: space-between;
 
+    @media screen and (max-width: 600px) {
+        .column {
+            width: 100%;
+            display: block;
+            margin-bottom: 20px;
+        }
+    }
 `;
 
-export const Img = styled.img `
+export const Card = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    image-rendering: pixelated;
+    background-image:url(${props => props.src});
+    background-size: cover;
+    background-position: center center;
+    flex-direction: column;
+    height: 300px;
+    width: 300px;
+    text-align: center;
+    border-radius: 10%;
+    transition:1s;
+    color: transparent;
+    font-size: 50px;
 
+    &:hover {
+        transition:1s;
+        border-image: fill 0 linear-gradient(transparent, black);
+        color: white;
+        font-size: 40px;
+        border-radius: 10%;
+    }
 `;
 
-export const Text = styled.div `
-
+export const Img = styled.img`
+    height: 200px;
+    width: 200px;
+    border-radius: 10%;
 `;
 
-export const H1 = styled.h3 `
-
+export const Text = styled.div`
+    
 `;
 
-export const P = styled.p `
+export const H1 = styled.h3`
+    
+`;
+
+export const P = styled.p`
+    
+`;
+
+export const A = styled.a`
     
 `;
