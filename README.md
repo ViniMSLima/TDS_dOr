@@ -35,8 +35,10 @@ FRONT
 
 - [ ] Login Screen 
 - [ ] Register Screen
+- [ ] Register Game Screen
 
 BACK
 
 - [ ] Login User and ADM
 - [ ] Register User and ADM
+- [ ] Register Game
