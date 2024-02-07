@@ -127,6 +127,7 @@ export const Comment = styled.div`
   @media (max-width: 768px) {
     width: 100%;
   }
+
 `;
 
 export const GameImage = styled.img`
@@ -141,7 +142,6 @@ export const GameImage = styled.img`
   @media (max-width: 768px) {
     width: 55vw;
   }
-
 `;
 
 export const DownloadButton = styled.button`

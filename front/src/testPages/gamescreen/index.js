@@ -3,8 +3,8 @@ import { Container, Game, GameInfo, Input, Text, GameTitle, CommentButton, GameN
 import game from "../../games/etsTycoon.zip"
 import "./style.css";
 import gameImage from "../../assets/gameImages/logoAmelia.png";
-import gameBackground from "../../assets/gameImages/bg0.png";
 import { Void } from '../../components/common/styled';
+import gameBackground from "../../assets/gameImages/bgAmelia.png";
 
 function GameScreen() {
   const [ images, setImages ] = useState([])
