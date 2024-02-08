@@ -16,10 +16,11 @@ export const Div = styled.div `
     text-align: center;
     border-radius: 10%;
     font-size: 35px;
+    margin-top: 100px;
 `;
 
 export const Form = styled.form `
-    
+
 `;
 
 export const P = styled.p `

@@ -60,16 +60,19 @@ class UserController {
   }
 
   static async login(req, res) {
-    const { email, password } = req.body;
-    var decryptedEm = CryptoJS.AES.decrypt(email, process.env.SECRET).toString(CryptoJS.enc.Utf8);
-    var decryptedPw = CryptoJS.AES.decrypt(password, process.env.SECRET).toString(CryptoJS.enc.Utf8);
+    var decryptedEm = CryptoJS.AES.decrypt(req.body.jsonCrypt, process.env.SECRET).toString(CryptoJS.enc.Utf8);
+    const json = JSON.parse(decryptedEm);
+    const { email, password } = json;
 
-    const user = await User.findOne({ decryptedEm });
+    const user = await User.findOne({ email });
     if (!user)
       return res.status(400).send({ message: "Invalid Email or password" });
-    if (!(await bcrypt.compare(decryptedPw, user.password))) {
+
+    var decryptedPw = CryptoJS.AES.decrypt(user.password, process.env.SECRET).toString(CryptoJS.enc.Utf8);
+
+    if (password != decryptedPw)
       return res.status(400).send({ message: "Invalid Email or password" });
-    }
+
     const secret = process.env.SECRET;
     const token = jwt.sign(
       {

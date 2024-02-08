@@ -17,10 +17,9 @@ export default function LoginSignUp() {
     var [confirmPassword, setConfirmPassword] = useState('');
     var [isAdm, setIsAdm] = useState(false);
 
-    async function handleSubmit(e) {
+    async function handleSubmitRegister(e) {
         e.preventDefault();
-        console.log(formValid());
-        if (!formValid()) return
+        if (!formValidRegister()) return
 
         const json = {
             email, cpf, name, birthday, password, confirmPassword, isAdm
@@ -42,6 +41,7 @@ export default function LoginSignUp() {
             setPassword('');
             setConfirmPassword('');
             setIsAdm(false);
+            navigate('/home')
         }
         catch (error) {
             console.log(error);
@@ -51,7 +51,7 @@ export default function LoginSignUp() {
         }
     }
 
-    function formValid() {
+    function formValidRegister() {
         if (!name.includes(' ')) {
             setMessage('Insert your first and lastname')
             setShow(true);
@@ -91,15 +91,57 @@ export default function LoginSignUp() {
         return true
     }
 
+    async function handleSubmitLogin(e)
+    {
+        e.preventDefault();
+        console.log(formValidLogin());
+
+        if (!formValidLogin()) return
+
+        const json = {
+            email, password
+        }
+
+        try {
+            const jsonCrypt = CryptoJS.AES.encrypt(JSON.stringify(json), SECRET).toString();
+            var res = await axios.post('http://localhost:8080/api/user/login', {
+                jsonCrypt
+            })
+            sessionStorage.setItem('token', res.data.token);
+            navigate('/home')
+        } catch (error) {
+            console.log(error);
+            setMessage('Erro ao se conectar');
+            setShow(true);
+            setVariant('danger');
+        }
+    }
+
+    function formValidLogin() {
+        if (!email.includes('@')) {
+            setMessage('Insira um e-mail válidos')
+            setShow(true);
+            setVariant('danger')
+            return false;
+        }
+        if (email.length < 5) {
+            setMessage('Insira um e-mail válido')
+            setShow(true);
+            setVariant('danger')
+            return false;
+        }
+        return true
+    }
+
     return (
         <>
             <Container>
                 <Div>
                     <P>Login</P>
-                    <Form>
+                    <Form onSubmit={handleSubmitLogin}>
                         <InputBox>
-                            <Input type='email' placeholder='Email' />
-                            <Input type='password' placeholder='Password' />
+                            <Input value={email} onChange={(e) => setEmail(e.target.value)} type='email' placeholder='Email' />
+                            <Input value={password} onChange={(e) => setPassword(e.target.value)} type='password' placeholder='Password' />
                         </InputBox>
                         <Links>
                             <A>Sign Up</A>
@@ -111,10 +153,10 @@ export default function LoginSignUp() {
                 </Div>
             </Container>
 
-            <Container>
+            {/* <Container>
                 <Div>
                     <P>Sign Up</P>
-                    <Form onSubmit={handleSubmit}>
+                    <Form onSubmit={handleSubmitRegister}>
                         <InputBox>
                             <Input value={email} onChange={e => setEmail(e.target.value)} type='email' placeholder='Email' />
                             <Input value={name} onChange={e => setName(e.target.value)} type='Text' placeholder='Entire Name' />
@@ -139,7 +181,7 @@ export default function LoginSignUp() {
                         </InputBox>
                     </Form>
                 </Div>
-            </Container >
+            </Container > */}
         </>
     )
 }
