@@ -39,6 +39,6 @@ FRONT
 
 BACK
 
-- [ ] Login User and ADM
+- [X] Login User and ADM
 - [X] Register User and ADM
 - [ ] Register Game
