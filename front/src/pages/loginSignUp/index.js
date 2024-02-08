@@ -15,19 +15,21 @@ export default function LoginSignUp() {
     var [birthday, setBirthday] = useState(Date())
     var [password, setPassword] = useState('');
     var [confirmPassword, setConfirmPassword] = useState('');
+    var [isAdm, setIsAdm] = useState(false);
 
     async function handleSubmit(e) {
         e.preventDefault();
+        console.log(formValid());
         if (!formValid()) return
 
         const json = {
-            email, cpf, name, birthday, password, confirmPassword
+            email, cpf, name, birthday, password, confirmPassword, isAdm
         }
 
         const jsonCrypt = CryptoJS.AES.encrypt(JSON.stringify(json), SECRET).toString();
 
         try {
-            var res = await axios.post('http://localhost:8080/', {
+            var res = await axios.post('http://localhost:8080/api/user/register', {
                 jsonCrypt
             })
             setMessage(res.data.message);
@@ -39,6 +41,7 @@ export default function LoginSignUp() {
             setBirthday('');
             setPassword('');
             setConfirmPassword('');
+            setIsAdm(false);
         }
         catch (error) {
             console.log(error);
@@ -111,14 +114,22 @@ export default function LoginSignUp() {
             <Container>
                 <Div>
                     <P>Sign Up</P>
-                    <Form>
+                    <Form onSubmit={handleSubmit}>
                         <InputBox>
-                            <Input type='email' placeholder='Email' />
-                            <Input type='Text' placeholder='Entire Name' />
-                            <Input type='Text' placeholder='CPF' />
-                            <Input type='Date' />
-                            <Input type='password' placeholder='Password' />
-                            <Input type='password' placeholder='Confirm Password' />
+                            <Input value={email} onChange={e => setEmail(e.target.value)} type='email' placeholder='Email' />
+                            <Input value={name} onChange={e => setName(e.target.value)} type='Text' placeholder='Entire Name' />
+                            <Input value={cpf} onChange={e => setCpf(e.target.value)} type='Text' placeholder='CPF' />
+                            <Input value={birthday} onChange={e => setBirthday(e.target.value)} type='Date' />
+                            <Input value={password} onChange={e => setPassword(e.target.value)} type='password' placeholder='Password' />
+                            <Input value={confirmPassword} onChange={e => setConfirmPassword(e.target.value)} type='password' placeholder='Confirm Password' />
+                            <select value={isAdm} onChange={e => setIsAdm(e.target.value)}>
+                                <option value={true}>
+                                    ADM??
+                                </option>
+                                <option value={false}>
+                                    USER??
+                                </option>
+                            </select>
                         </InputBox>
                         <Links>
                             <A>Login</A>

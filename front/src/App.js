@@ -7,19 +7,21 @@ import SideBar from './components/sideBar';
 import GameScreen from './testPages/gamescreen';
 import GameRegister from './pages/gameRegister';
 import { Route, Routes } from 'react-router-dom';
-
+import { AlertProvider } from './context/alert';
 
 function App() {
   return (
     <>
-      <SideBar />
-      <NavBar />
-      <Routes>
-        <Route path='/login' element={<LoginSignUp />} />
-        <Route path='/home' element={<HomePage />} />
-        <Route path='/game' element={<GameScreen />} />
-        <Route path='/gameRegister' element={<GameRegister />} />
-      </Routes>
+      <AlertProvider>
+        <SideBar />
+        <NavBar />
+        <Routes>
+          <Route path='/login' element={<LoginSignUp />} />
+          <Route path='/home' element={<HomePage />} />
+          <Route path='/game' element={<GameScreen />} />
+          <Route path='/gameRegister' element={<GameRegister />} />
+        </Routes>
+      </AlertProvider>
     </>
   );
 }

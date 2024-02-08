@@ -7,17 +7,19 @@ require("dotenv").config();
 class UserController {
   static async register(req, res) {
 
-    // var bytes = CryptoJS.AES.decrypt(req.body.jsonCrypt, process.env.SECRET);
-    // const decryptd = bytes.toString(CryptoJS.enc.Utf8);
-    // const json = JSON.parse(decryptd);
+    var bytes = CryptoJS.AES.decrypt(req.body.jsonCrypt, process.env.SECRET);
+    const decryptd = bytes.toString(CryptoJS.enc.Utf8);
+    const json = JSON.parse(decryptd);
 
-    const {email, name, cpf, birth, password, confirmPassword, isAdm } = req.body;
-
-    if (!name) return res.status(400).json({ message: "Name is mandatory" });
+    const { email, cpf, name, birthday, password, confirmPassword, isAdm } = json;
 
     if (!email) return res.status(400).json({ message: "E-mail is mandatory" });
 
-    if (!birth) return res.status(400).json({ message: "Birth date is mandatory" });
+    if (!cpf) return res.status(400).json({ message: "CPF is mandatory" });
+
+    if (!name) return res.status(400).json({ message: "Name is mandatory" });
+
+    if (!birthday) return res.status(400).json({ message: "Birth date is mandatory" });
 
     if (!password)
       return res.status(400).json({ message: "Password is mandatory" });
@@ -36,9 +38,10 @@ class UserController {
     ).toString();
 
     const user = new User({
-      name,
-      birth,
       email,
+      cpf,
+      name,
+      birthday,
       isAdm,
       password: passwordCrypt,
       createdAt: Date.now(),
@@ -58,8 +61,8 @@ class UserController {
 
   static async login(req, res) {
     const { email, password } = req.body;
-    var decryptedEm = CryptoJS.AES.decrypt(email, "senhasecreta").toString(CryptoJS.enc.Utf8);
-    var decryptedPw = CryptoJS.AES.decrypt(password, "senhasecreta").toString(CryptoJS.enc.Utf8);
+    var decryptedEm = CryptoJS.AES.decrypt(email, process.env.SECRET).toString(CryptoJS.enc.Utf8);
+    var decryptedPw = CryptoJS.AES.decrypt(password, process.env.SECRET).toString(CryptoJS.enc.Utf8);
 
     const user = await User.findOne({ decryptedEm });
     if (!user)

@@ -18,7 +18,7 @@ export const Div = styled.div `
     font-size: 35px;
 `;
 
-export const Form = styled.div `
+export const Form = styled.form `
     
 `;
 
