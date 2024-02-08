@@ -1,6 +1,7 @@
 const { Game } = require('../models/Game');
-const  buf2str = require('buffer');
+const { GameData } = require('../models/GameData');
 
+const fs = require('fs');
 
 class GameController {
   static async create(req, res) {
@@ -20,12 +21,40 @@ class GameController {
     });
 
     if (req.file) {
-        var a = req.file.buffer.toString('base64')
-        game.gamePath = a
+      // 16700000
+      var zip = req.file.buffer.toString('base64');
+
+      var partsLength = 9e6
+      var gameLength = zip.length
+      var parts = gameLength / partsLength
+      var exactParts = Math.floor(parts);
+
+      var k = 0;
+
+      for (var j = 0; j < exactParts; j++) {
+        const actualPart = new GameData({
+          data: zip.slice(k, k + partsLength),
+          game: name,
+          part: j,
+          createdAt: Date.now(),
+        });
+        await actualPart.save();
+        k += partsLength;
+      }
+
+      const lastPart = new GameData({
+        data: zip.slice(k),
+        game: name,
+        part: j,
+        createdAt: Date.now(),
+      });
+
+      await lastPart.save();
     }
 
     try {
-    //   await game.save();
+      await game.save();
+
       res.status(201).send({ message: 'Game registered successfully' });
     } catch (error) {
       return res.status(500).send({ message: 'Something failed while creating a game' });
@@ -40,6 +69,31 @@ class GameController {
       return res.status(200).send({ game });
     } catch (error) {
       return res.status(404).send({ error: 'Game not found!' });
+    }
+  }
+
+  static async getZip(req, res) {
+    const { name } = req.body;
+
+    const games = await GameData.find({ game: name });
+
+    const parts = games.map(game => Buffer.from(game.data, 'base64'));
+    const buffer = Buffer.concat(parts);
+
+    try {
+      fs.writeFileSync('output.zip', buffer);
+      const readStream = fs.createReadStream('output.zip');
+      readStream.on('error', (error) => {
+        console.error('Erro ao ler o arquivo:', error);
+        res.status(500).send({ error: 'Erro ao ler o arquivo' });
+      });
+
+      res.setHeader('Content-Type', 'application/octet-stream');
+      res.setHeader('Content-Disposition', `attachment; filename=${name}.zip`);
+      readStream.pipe(res);
+    } catch (error) {
+      console.error('Erro ao baixar o arquivo:', error);
+      res.status(404).send({ error: 'Game not found!' });
     }
   }
 }

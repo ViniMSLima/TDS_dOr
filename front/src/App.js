@@ -17,6 +17,7 @@ function App() {
         <Route path='/homePage' element={<HomePage />} />
         <Route path='/home' element={<Download />} />
         <Route path='/game' element={<GameScreen />} />
+        <Route path='/testdownload' element={<Download />} />
       </Routes>
     </>
   );
