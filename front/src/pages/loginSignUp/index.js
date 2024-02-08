@@ -4,7 +4,8 @@ import { SECRET } from '../../env';
 import { useNavigate } from "react-router-dom";
 import { AlertContext } from '../../context/alert';
 import { useState, useEffect, useContext } from "react";
-import { Container, Div, Form, InputBox, Links, A, Button, Input, P } from './styled';
+import { Container, Div, Form, InputBox, Links, A, Button, Input, P, Video, Source, Img } from './styled';
+import Bg from '../../assets/gameImages/bg0.png';
 
 export default function LoginSignUp() {
     const navigate = useNavigate();
@@ -135,6 +136,7 @@ export default function LoginSignUp() {
 
     return (
         <>
+            <Img src={Bg} />
             <Container>
                 <Div>
                     <P>Login</P>

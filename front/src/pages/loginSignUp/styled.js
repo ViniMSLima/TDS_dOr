@@ -4,6 +4,8 @@ export const Container = styled.div `
     display: flex;
     justify-content: center;
     align-items: center;
+    min-height: 100vh;
+    z-index: 1;
 `;
 
 export const Div = styled.div `
@@ -11,12 +13,15 @@ export const Div = styled.div `
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    height: 300px;
-    width: 300px;
+    height: 450px;
+    width: 450px;
     text-align: center;
     border-radius: 10%;
     font-size: 35px;
-    margin-top: 100px;
+    background-color: #7a1879;
+    background: transparent;
+    backdrop-filter: blur(5px);
+    border: 4px solid gray;
 `;
 
 export const Form = styled.form `
@@ -47,10 +52,22 @@ export const A = styled.a `
 `;
 
 export const Input = styled.input `
-    
+    background: transparent;
+    backdrop-filter: blur(5px);
+    border: 2px solid gray;
+    border-radius: 50px;
+    margin-top: 10px;
 `;
 
 export const Button = styled.input `
-
+    border-radius: 50px;
+    border: none;
+    width: 250px;
 `;
 
+export const Img = styled.img `
+    display: flex;
+    position: absolute;
+    z-index: -1;
+    min-height: 100vh;
+`;
