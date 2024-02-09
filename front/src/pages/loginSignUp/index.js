@@ -3,13 +3,18 @@ import CryptoJS from 'crypto-js';
 import { SECRET } from '../../env';
 import { useNavigate } from "react-router-dom";
 import { AlertContext } from '../../context/alert';
-import { useState, useEffect, useContext } from "react";
-import { Container, Div, Form, InputBox, Links, A, Button, Input, P, Video, Source, Img } from './styled';
-import Bg from '../../assets/gameImages/bg0.png';
+import { useState, useContext } from "react";
+import {
+    Img, 
+    ContainerLogin, DivLogin, FormLogin, InputBoxLogin, LinksLogin, ALogin, ButtonLogin, InputLogin, PLogin,
+    ContainerSignUp, DivSignUp, FormSignUp, InputBoxSignUp, LinksSignUp, ASignUp, ButtonSignUp, InputSignUp, PSignUp
+} from './styled';
+import Bg from '../../assets/bgs/loginBg.png';
 
 export default function LoginSignUp() {
     const navigate = useNavigate();
     const { setMessage, setShow, setVariant } = useContext(AlertContext);
+    const [cards, setCards] = useState(0);
     var [email, setEmail] = useState('');
     var [name, setName] = useState('');
     var [cpf, setCpf] = useState('');
@@ -92,8 +97,7 @@ export default function LoginSignUp() {
         return true
     }
 
-    async function handleSubmitLogin(e)
-    {
+    async function handleSubmitLogin(e) {
         e.preventDefault();
         console.log(formValidLogin());
 
@@ -137,53 +141,51 @@ export default function LoginSignUp() {
     return (
         <>
             <Img src={Bg} />
-            <Container>
-                <Div>
-                    <P>Login</P>
-                    <Form onSubmit={handleSubmitLogin}>
-                        <InputBox>
-                            <Input value={email} onChange={(e) => setEmail(e.target.value)} type='email' placeholder='Email' />
-                            <Input value={password} onChange={(e) => setPassword(e.target.value)} type='password' placeholder='Password' />
-                        </InputBox>
-                        <Links>
-                            <A>Sign Up</A>
-                        </Links>
-                        <InputBox>
-                            <Button type='submit' />
-                        </InputBox>
-                    </Form>
-                </Div>
-            </Container>
+            {
+                cards == 0 &&
+                <ContainerLogin>
+                    <DivLogin>
+                        <PLogin>Login</PLogin>
+                        <FormLogin onSubmit={handleSubmitLogin}>
+                            <InputBoxLogin>
+                                <InputLogin value={email} onChange={(e) => setEmail(e.target.value)} type='email' placeholder='Email' />
+                                <InputLogin value={password} onChange={(e) => setPassword(e.target.value)} type='password' placeholder='Password' />
+                            </InputBoxLogin>
+                            <LinksLogin>
+                                <ALogin onClick={() => setCards(1)}>Sign Up</ALogin>
+                            </LinksLogin>
+                            <InputBoxLogin>
+                                <ButtonLogin type='submit' />
+                            </InputBoxLogin>
+                        </FormLogin>
+                    </DivLogin>
+                </ContainerLogin>
+            }
 
-            {/* <Container>
-                <Div>
-                    <P>Sign Up</P>
-                    <Form onSubmit={handleSubmitRegister}>
-                        <InputBox>
-                            <Input value={email} onChange={e => setEmail(e.target.value)} type='email' placeholder='Email' />
-                            <Input value={name} onChange={e => setName(e.target.value)} type='Text' placeholder='Entire Name' />
-                            <Input value={cpf} onChange={e => setCpf(e.target.value)} type='Text' placeholder='CPF' />
-                            <Input value={birthday} onChange={e => setBirthday(e.target.value)} type='Date' />
-                            <Input value={password} onChange={e => setPassword(e.target.value)} type='password' placeholder='Password' />
-                            <Input value={confirmPassword} onChange={e => setConfirmPassword(e.target.value)} type='password' placeholder='Confirm Password' />
-                            <select value={isAdm} onChange={e => setIsAdm(e.target.value)}>
-                                <option value={true}>
-                                    ADM??
-                                </option>
-                                <option value={false}>
-                                    USER??
-                                </option>
-                            </select>
-                        </InputBox>
-                        <Links>
-                            <A>Login</A>
-                        </Links>
-                        <InputBox>
-                            <Button type='submit' />
-                        </InputBox>
-                    </Form>
-                </Div>
-            </Container > */}
+            {
+                cards == 1 &&
+                <ContainerSignUp>
+                    <DivSignUp>
+                        <PSignUp>Sign Up</PSignUp>
+                        <FormSignUp onSubmit={handleSubmitRegister}>
+                            <InputBoxSignUp>
+                                <InputSignUp value={email} onChange={e => setEmail(e.target.value)} type='email' placeholder='Email' />
+                                <InputSignUp value={name} onChange={e => setName(e.target.value)} type='Text' placeholder='Entire Name' />
+                                <InputSignUp value={cpf} onChange={e => setCpf(e.target.value)} type='Text' placeholder='CPF' />
+                                <InputSignUp value={birthday} onChange={e => setBirthday(e.target.value)} type='Date' />
+                                <InputSignUp value={password} onChange={e => setPassword(e.target.value)} type='password' placeholder='Password' />
+                                <InputSignUp value={confirmPassword} onChange={e => setConfirmPassword(e.target.value)} type='password' placeholder='Confirm Password' />
+                            </InputBoxSignUp>
+                            <LinksSignUp>
+                                <ASignUp onClick={() => setCards(0)}>Login</ASignUp>
+                            </LinksSignUp>
+                            <InputBoxSignUp>
+                                <ButtonSignUp type='submit' />
+                            </InputBoxSignUp>
+                        </FormSignUp>
+                    </DivSignUp>
+                </ContainerSignUp>
+            }
         </>
     )
 }

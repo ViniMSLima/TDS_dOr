@@ -6,6 +6,7 @@ FRONT
 - [X] Home Screen
 - [ ] Ratings
 - [X] Sidebar
+- [X] Transform sidebar to a navbar
 
 BACK
 
