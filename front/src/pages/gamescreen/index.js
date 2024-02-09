@@ -13,7 +13,7 @@ function GameScreen() {
   const [description, setDescription] = useState('');
 
   async function getGame() {
-    sessionStorage.setItem('id', "65c61d730e1f40683803c3c2");
+    sessionStorage.setItem('id', "65c638ce49601d493e86f544");
     const id = sessionStorage.getItem('id');
     
     try {

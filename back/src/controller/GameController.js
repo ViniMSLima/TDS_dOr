@@ -74,6 +74,34 @@ class GameController {
     }
   }
 
+  static async getAll(req, res) {
+    try {
+      const game = await Game.find();
+      return res.status(200).send({ game });
+    } catch (error) {
+      return res.status(404).send({ error: 'Game not found!' });
+    }
+  }
+
+  static async DeleteById(req, res) {
+    const { id }= req.body
+
+    try {
+      const game = await Game.findById(id);
+      console.log(game.name);
+      const games = await GameData.find({game: game.name});
+      // console.log(games);
+      games.forEach(async gameID => {
+        console.log(gameID.id)
+        const deletedGameData = await Game.findOneAndDelete({id: gameID.id});
+      });
+      // const deletedGame = await Game.findByIdAndDelete(id).populate('gamePath');
+      return res.status(200).send({ message: "Game and GameData deleted!" });
+    } catch (error) {
+      return res.status(404).send({ error: 'Game not found!' });
+    }
+  }
+
   static async getZip(req, res) {
     const { name } = req.body;
 
