@@ -6,10 +6,14 @@ FRONT
 - [ ] Home Screen
 - [ ] Ratings
 - [ ] Sidebar
+- [ ] Login Screen 
+- [ ] Register Screen
 
 BACK
 
 - [ ] Register games in MongoDB
+- [ ] Login User and ADM
+- [ ] Register User and ADM
 
 ### Vini
 
@@ -37,13 +41,3 @@ BACK
 
 - [ ] Hosting
 - [ ] Get all the games .zip
-
-FRONT 
-
-- [ ] Login Screen 
-- [ ] Register Screen
-
-BACK
-
-- [ ] Login User and ADM
-- [ ] Register User and ADM

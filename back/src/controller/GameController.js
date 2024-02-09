@@ -64,7 +64,7 @@ class GameController {
   }
 
   static async get(req, res) {
-    const { id } = req.params;
+    const { id } = req.body;
 
     try {
       const game = await Game.findById(id).populate('gamePath');

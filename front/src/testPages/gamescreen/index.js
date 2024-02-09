@@ -4,6 +4,8 @@ import game from "../../games/etsTycoon.zip"
 import "./style.css";
 import { Void } from '../../components/common/styled';
 import axios from 'axios';
+import { saveAs } from 'file-saver';
+
 
 function GameScreen() {
   const [images, setImages] = useState([]);
@@ -12,12 +14,10 @@ function GameScreen() {
   const [rating, setRating] = useState('');
   const [description, setDescription] = useState('');
 
-  const id = "65c36790113cf9660cbe1d43";
-
   async function getGame() {
     try {
-      const res = await axios.get('http://localhost:8080/api/game/get', {
-        params: { id: '65c36790113cf9660cbe1d43' }
+      const res = await axios.post('http://localhost:8080/api/game/get', {
+        id: '65c612800e1f40683803c39a'
       });
 
       setImages([res.data.game.bgPath, res.data.game.imgPath]);
@@ -30,6 +30,37 @@ function GameScreen() {
       console.error('Error fetching game data:', error);
     }
   }
+
+  const [loading, setLoading] = useState(false);
+
+  const downloadZip = async () => {
+    setLoading(true);
+
+    try {
+      const response = await fetch('http://localhost:8080/api/game/getzip', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ name: name }),
+      });
+
+      if (!response.ok) {
+        throw new Error('Erro ao baixar o arquivo');
+      }
+
+      const blob = await response.blob();
+      saveAs(blob, name + '.zip');
+      const deleteZip = await fetch('http://localhost:8080/api/game/deletezip', {
+        method: 'DELETE'
+      });
+
+    } catch (error) {
+      console.error('Erro ao baixar o arquivo:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   useEffect(() => {
     getGame();
@@ -63,8 +94,8 @@ function GameScreen() {
           <Void />
           <div style={{ display: 'flex', flexDirection: 'column', height: '80%' }}>
             <GameImage src={images[1]}></GameImage>
-            <a href={gamePath} download>
-              <DownloadButton>DOWNLOAD</DownloadButton>
+            <a>
+              <DownloadButton onClick={downloadZip} disabled={loading}>DOWNLOAD</DownloadButton>
             </a>
           </div>
           <Void />

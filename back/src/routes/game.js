@@ -7,7 +7,7 @@ const upload = multer({ storage: multer.memoryStorage() });
 
 router
   .post("/create", upload.single('gamePath'), GameController.create)
-  .get("/get", GameController.get)
+  .post("/get", GameController.get)
   .post("/getzip", GameController.getZip)
   .delete("/deletezip", GameController.deleteZip)
 
