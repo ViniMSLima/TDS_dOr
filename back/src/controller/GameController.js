@@ -2,6 +2,8 @@ const { Game } = require('../models/Game');
 const { GameData } = require('../models/GameData');
 
 const fs = require('fs');
+const { promisify } = require('util');
+const unlink = promisify(fs.unlink);
 
 class GameController {
   static async create(req, res) {
@@ -75,12 +77,11 @@ class GameController {
   static async getZip(req, res) {
     const { name } = req.body;
 
-    const games = await GameData.find({ game: name });
-
-    const parts = games.map(game => Buffer.from(game.data, 'base64'));
-    const buffer = Buffer.concat(parts);
-
     try {
+      const games = await GameData.find({ game: name });
+      const parts = games.map(game => Buffer.from(game.data, 'base64'));
+      const buffer = Buffer.concat(parts);
+
       fs.writeFileSync('output.zip', buffer);
       const readStream = fs.createReadStream('output.zip');
       readStream.on('error', (error) => {
@@ -93,6 +94,18 @@ class GameController {
       readStream.pipe(res);
     } catch (error) {
       console.error('Erro ao baixar o arquivo:', error);
+      res.status(404).send({ error: 'Game not found!' });
+    }
+  }
+
+  static async deleteZip(req, res) {
+
+    try {
+      await Promise.all([unlink(`output.zip`)]);
+      return res.status(200).send({ message: "deletado com sucesso" })
+
+    } catch (error) {
+      console.error('Erro ao goiabar o arquivo:', error);
       res.status(404).send({ error: 'Game not found!' });
     }
   }

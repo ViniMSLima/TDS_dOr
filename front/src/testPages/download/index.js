@@ -22,6 +22,10 @@ const DownloadZip = () => {
 
       const blob = await response.blob();
       saveAs(blob, 'game-name.zip');
+      const deleteZip = await fetch('http://localhost:8080/api/game/deletezip', {
+        method: 'DELETE'
+      });
+      
     } catch (error) {
       console.error('Erro ao baixar o arquivo:', error);
     } finally {
