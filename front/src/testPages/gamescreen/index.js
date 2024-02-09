@@ -1,16 +1,68 @@
 import React, { useEffect, useState } from 'react';
 import { Container, Game, GameInfo, Input, Text, GameTitle, CommentButton, GameName, GameRating, GameDescription, RatingSection, RatingLabel, CommentsSection, CommentsLabel, Comment, GameImage, DownloadButton, TextArea } from './styled';
-import game from "../../games/etsTycoon.zip"
 import "./style.css";
-import gameImage from "../../assets/gameImages/logoAmelia.png";
 import { Void } from '../../components/common/styled';
-import gameBackground from "../../assets/gameImages/bgAmelia.png";
+import axios from 'axios';
+import { saveAs } from 'file-saver';
+
 
 function GameScreen() {
-  const [ images, setImages ] = useState([])
+  const [images, setImages] = useState([]);
+  const [name, setName] = useState('');
+  const [rating, setRating] = useState('');
+  const [description, setDescription] = useState('');
+
+  async function getGame() {
+    sessionStorage.setItem('id', "65c61d730e1f40683803c3c2");
+    const id = sessionStorage.getItem('id');
+    
+    try {
+      const res = await axios.post('http://localhost:8080/api/game/get', {
+        id: id
+      });
+
+      setImages([res.data.game.bgPath, res.data.game.imgPath]);
+      setName(res.data.game.name);
+      setRating(res.data.game.rating);
+      setDescription(res.data.game.description);
+    } catch (error) {
+      console.error('Error fetching game data:', error);
+    }
+  }
+
+  const [loading, setLoading] = useState(false);
+
+  const downloadZip = async () => {
+    setLoading(true);
+
+    try {
+      const response = await fetch('http://localhost:8080/api/game/getzip', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ name: name }),
+      });
+
+      if (!response.ok) {
+        throw new Error('Erro ao baixar o arquivo');
+      }
+
+      const blob = await response.blob();
+      saveAs(blob, name + '.zip');
+      const deleteZip = await fetch('http://localhost:8080/api/game/deletezip', {
+        method: 'DELETE'
+      });
+
+    } catch (error) {
+      console.error('Erro ao baixar o arquivo:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   useEffect(() => {
-    setImages([gameBackground, gameImage])
+    getGame();
   }, [])
 
   return (
@@ -19,18 +71,13 @@ function GameScreen() {
         <Game>
           <GameInfo>
             <GameTitle>
-              <GameName>Amelia and The Third Dimension</GameName>
-              <GameRating>9.5</GameRating>
+              <GameName>{name}</GameName>
+              <GameRating>{rating}</GameRating>
             </GameTitle>
-  
+
             <GameDescription>
               <Text>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec enim nunc, volutpat
-                faucibus porttitor vitae, tincidunt nec lectus. Aenean nec tristique enim, sed scelerisque tortor.
-                Curabitur eu justo non libero fringilla pharetra vel sed lacus. Praesent porttitor est vitae libero
-                volutpat, eget viverra nibh hendrerit. Pellentesque vitae eros interdum, ullamcorper magna nec,
-                efficitur enim. Quisque enim sem, cursus at libero ut, tincidunt semper ipsum. Nulla malesuada
-                tortor at ligula posuere, vulputate finibus nulla. Maecenas luctus iaculis commodo.
+                {description}
               </Text>
             </GameDescription>
             <RatingSection>
@@ -43,14 +90,12 @@ function GameScreen() {
 
             </RatingSection>
           </GameInfo>
-          <Void/>
-          <div style={{ display: 'flex', flexDirection: 'column', height: '80%'}}>
-            <GameImage src= {images[1]}></GameImage>
-            <a href={game} download>
-              <DownloadButton>DOWNLOAD</DownloadButton>
-            </a>
+          <Void />
+          <div style={{ display: 'flex', flexDirection: 'column', height: '80%' }}>
+            <GameImage src={images[1]}></GameImage>
+              <DownloadButton onClick={downloadZip} disabled={loading}>DOWNLOAD</DownloadButton>
           </div>
-          <Void/>
+          <Void />
         </Game>
         <Game>
           <CommentsSection>
@@ -68,8 +113,8 @@ function GameScreen() {
               <Comment>The graphics are amazing.</Comment>
               <Comment>The graphics are amazing.</Comment>
             </TextArea>
-        <Void/>
-        <Void/>
+            <Void />
+            <Void />
           </CommentsSection>
         </Game>
       </Container>

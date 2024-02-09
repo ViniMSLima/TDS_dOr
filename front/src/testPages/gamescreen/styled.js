@@ -46,6 +46,7 @@ export const GameName = styled.div`
   width: 100%;
   font-size: 7vh;
   text-align: center;
+  justify-content: center;
 
 `;
 

@@ -1,22 +1,45 @@
+import React, { useState } from 'react';
+import { saveAs } from 'file-saver';
 
-import { useState } from "react"
-// import arquivo from "../../games/etsTycoon.zip"
+const DownloadZip = () => {
+  const [loading, setLoading] = useState(false);
 
-export default function LoginPage() {
+  const downloadZip = async () => {
+    setLoading(true);
 
-    const [arquivo, setArquivo] = useState('');
+    try {
+      const response = await fetch('http://localhost:8080/api/game/getzip', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ name: 'test game' }),
+      });
 
-    async function seila(){
-        // get da api
-        // setArquivo(res.data.path);
+      if (!response.ok) {
+        throw new Error('Erro ao baixar o arquivo');
+      }
+
+      const blob = await response.blob();
+      saveAs(blob, 'game-name.zip');
+      const deleteZip = await fetch('http://localhost:8080/api/game/deletezip', {
+        method: 'DELETE'
+      });
+      
+    } catch (error) {
+      console.error('Erro ao baixar o arquivo:', error);
+    } finally {
+      setLoading(false);
     }
-    return (
-        <>
-            <a href={arquivo} download>
-                <button type="button">
-                    Download MazeJalma
-                </button>
-            </a>
-        </>
-    )
-}
+  };
+
+  return (
+    <div>
+      <button onClick={downloadZip} disabled={loading}>
+        Baixar arquivo .zip
+      </button>
+    </div>
+  );
+};
+
+export default DownloadZip;
