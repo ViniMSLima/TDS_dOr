@@ -7,8 +7,9 @@ FRONT
 - [ ] Ratings
 - [X] Sidebar
 - [X] Transform sidebar to a navbar
-- [ ] Login Screen 
-- [ ] Register Screen
+- [X] Login Screen 
+- [X] Register Screen
+- [X] Responsive Screens (Home, Login/SignUp)
 
 BACK
 
