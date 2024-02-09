@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { Container, Game, GameInfo, Input, Text, GameTitle, CommentButton, GameName, GameRating, GameDescription, RatingSection, RatingLabel, CommentsSection, CommentsLabel, Comment, GameImage, DownloadButton, TextArea } from './styled';
-import game from "../../games/etsTycoon.zip"
 import "./style.css";
 import { Void } from '../../components/common/styled';
 import axios from 'axios';
@@ -9,23 +8,23 @@ import { saveAs } from 'file-saver';
 
 function GameScreen() {
   const [images, setImages] = useState([]);
-  const [gamePath, setGamePath] = useState();
   const [name, setName] = useState('');
   const [rating, setRating] = useState('');
   const [description, setDescription] = useState('');
 
   async function getGame() {
+    sessionStorage.setItem('id', "65c61d730e1f40683803c3c2");
+    const id = sessionStorage.getItem('id');
+    
     try {
       const res = await axios.post('http://localhost:8080/api/game/get', {
-        id: '65c612800e1f40683803c39a'
+        id: id
       });
 
       setImages([res.data.game.bgPath, res.data.game.imgPath]);
-      setGamePath(res.data.game.gamePath);
       setName(res.data.game.name);
       setRating(res.data.game.rating);
       setDescription(res.data.game.description);
-      setGamePath(res.data.game.gamePath);
     } catch (error) {
       console.error('Error fetching game data:', error);
     }
@@ -94,9 +93,7 @@ function GameScreen() {
           <Void />
           <div style={{ display: 'flex', flexDirection: 'column', height: '80%' }}>
             <GameImage src={images[1]}></GameImage>
-            <a>
               <DownloadButton onClick={downloadZip} disabled={loading}>DOWNLOAD</DownloadButton>
-            </a>
           </div>
           <Void />
         </Game>
