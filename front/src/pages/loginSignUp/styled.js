@@ -224,7 +224,7 @@ export const InputSignUp = styled.input `
 `;
 
 export const ButtonSignUp = styled.input `
-    border-radius: 20px;
+    border-radius: 20px 20px 0px 0px;
     border: none;
     width: 250px;
     background-color: lightgray;
@@ -233,7 +233,7 @@ export const ButtonSignUp = styled.input `
 
     &:hover{
         transition: 1s;
-        transform: scale(0.95);
+        transform: scale(0.99);
         background-color: gray;
     }
 
