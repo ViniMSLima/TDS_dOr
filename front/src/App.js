@@ -4,7 +4,7 @@ import HomePage from './pages/home';
 import NavBar from './components/navBar';
 import SideBar from './components/sideBar';
 import Download from './testPages/download';
-import GameScreen from './testPages/gamescreen';
+import GameScreen from './pages/gamescreen';
 import { Route, Routes } from 'react-router-dom';
 
 
