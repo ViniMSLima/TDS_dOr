@@ -1,25 +1,37 @@
 import { Container, Card, Column, Row } from './styled';
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import logo1 from '../../assets/gameImages/logoAmelia.png';
-import logo2 from '../../assets/gameImages/logoFut.png';
-import logo3 from '../../assets/gameImages/logoMoto.png';
-import logo4 from '../../assets/gameImages/logoHabbo.png';
+import axios from 'axios';
 
 export default function HomePage() {
-    const [imgArr, setImgArr] = useState([]);
+    const [games, setGames] = useState([]);
+
     const navigate = useNavigate();
 
+    async function getGames() {
+        try {
+            const res = await axios.get('http://localhost:8080/api/game/get');
+            setGames(res.data.game);
+        } catch (error) {
+            console.error('Error fetching game data:', error);
+        }
+    }
+
+    function handleClick(id) {
+        sessionStorage.setItem('id', id)
+        navigate("/game")
+    }
+
     useEffect(() => {
-        setImgArr([logo1, logo2, logo3, logo4])
+        getGames();
     }, [])
 
     const RenderImages = () => {
-        return imgArr.map(img => {
+        return games.map(gamy => {
             return (
-                <Column>
-                    <Card src={img}>
-                            Name
+                <Column key={gamy._id} onClick={() => handleClick(gamy._id)}>
+                    <Card src={gamy.imgPath}>
+                        {gamy.name}
                     </Card>
                 </Column>
             )

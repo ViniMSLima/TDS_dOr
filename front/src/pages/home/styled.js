@@ -55,6 +55,7 @@ export const Card = styled.div`
         color: white;
         font-size: 40px;
         border-radius: 10%;
+        cursor: pointer;
     }
 `;
 
