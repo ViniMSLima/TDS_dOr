@@ -5,6 +5,7 @@ import HomePage from './pages/home';
 import NavBar from './components/navBar';
 import SideBar from './components/sideBar';
 import GameScreen from './pages/gamescreen';
+import Register from './testPages/reg';
 import GameRegister from './pages/gameRegister';
 import { Route, Routes } from 'react-router-dom';
 import { AlertProvider } from './context/alert';
@@ -19,7 +20,7 @@ function App() {
           <Route path='/login' element={<LoginSignUp />} />
           <Route path='/home' element={<HomePage />} />
           <Route path='/game' element={<GameScreen />} />
-          <Route path='/gameRegister' element={<GameRegister />} />
+          <Route path='/gameregister' element={<Register />} />
         </Routes>
         </AlertProvider>
     </>
