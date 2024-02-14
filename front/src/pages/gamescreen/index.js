@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from 'react';
-import { Container, Game, GameInfo, Input, Text, GameTitle, CommentButton, GameName, GameRating, GameDescription, RatingSection, RatingLabel, CommentsSection, CommentsLabel, Comment, GameImage, DownloadButton, TextArea } from './styled';
 import "./style.css";
-import { Void } from '../../components/common/styled';
 import axios from 'axios';
 import { saveAs } from 'file-saver';
+import React, { useEffect, useState, useContext } from 'react';
+import { Void } from '../../components/common/styled';
+import { TranslateContext } from '../../context/translate';
+import { Container, Game, GameInfo, Input, Text, GameTitle, CommentButton, GameName, GameRating, GameDescription, RatingSection, RatingLabel, CommentsSection, CommentsLabel, Comment, GameImage, DownloadButton, TextArea } from './styled';
 
 
 function GameScreen() {
@@ -11,6 +12,7 @@ function GameScreen() {
   const [name, setName] = useState('');
   const [rating, setRating] = useState('');
   const [description, setDescription] = useState('');
+  const { language } = useContext(TranslateContext);
 
   async function getGame() {
     sessionStorage.setItem('id', "65c638ce49601d493e86f544");
@@ -84,17 +86,17 @@ function GameScreen() {
           <Void />
           <div style={{ display: 'flex', flexDirection: 'column', height: '80%' }}>
             <GameImage src={images[1]}></GameImage>
-              <DownloadButton onClick={downloadZip} disabled={loading}>DOWNLOAD</DownloadButton>
+              <DownloadButton onClick={downloadZip} disabled={loading}>{language === 'en' ? 'DOWNLOAD' : 'BAIXAR'}</DownloadButton>
           </div>
           <Void />
         </Game>
         <Game>
           <CommentsSection>
-            <CommentsLabel>COMMENTS</CommentsLabel>
+            <CommentsLabel>{language === 'en' ? 'COMMENTS' : 'COMENTARIOS'}</CommentsLabel>
 
             <TextArea>
               <Input />
-              <CommentButton>COMMENT</CommentButton>
+              <CommentButton>{language === 'en' ? 'COMMENT' : 'COMENTAR'}</CommentButton>
             </TextArea>
             <TextArea>
               <Comment>This is a great game!</Comment>
