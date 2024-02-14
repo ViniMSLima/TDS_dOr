@@ -1,12 +1,74 @@
-import {  } from './styled';
-import { useState, useEffect } from "react";
+import Bg from '../../assets/bgs/loginBg.png';
 import { useNavigate } from "react-router-dom";
+import React, { useState, useContext } from 'react';
+import { TranslateContext } from '../../context/translate';
+import { Button, Container, InputBox, Input, Div, Img, Form, P, PTitle } from './styled';
 
-export default function GameRegister() {
-    const navigate = useNavigate();
+function GameRegister() {
+  const navigate = useNavigate();
+  const { language } = useContext(TranslateContext);
+  const [images, setImages] = useState([])
+  const [name, setName] = useState("");
+  const [description, setDescription] = useState("");
+  const [rating, setRating] = useState(0);
+  const [file, setFile] = useState("");
+  const [bg, setBg] = useState("");
+  const [img, setImg] = useState("");
 
-    return (
-        <>
-        </>
-    )
+  async function gameRegister() {
+    const formData = new FormData();
+    formData.append('name', name);
+    formData.append('description', description);
+    formData.append('rating', rating);
+    formData.append('bgPath', bg);
+    formData.append('imgPath', img);
+    formData.append('gamePath', file);
+
+    try {
+      const res = await fetch('http://localhost:8080/api/game/create', {
+        method: 'POST',
+        headers: {
+          ...formData.getHeaders()
+        },
+        body: formData
+      });
+      console.log(res);
+    }
+    catch (error) {
+      console.log(error);
+    }
+
+  }
+
+  return (
+    <>
+      <Img src={Bg} />
+      <Container src={images[0]}>
+        <Div>
+          <P>{language === 'en' ? 'Game Register' : 'Cadastrar Jogo'}</P>
+          <Form>
+            <InputBox>
+              <Input type='file' onChange={(e) => setFile(e.target.files)} />
+              <Input placeholder={language === 'en' ? 'Game Name' : 'Nome do Jogo'} onChange={(e) => setFile(e.target.value)} />
+              <Input type='number' placeholder={language === 'en' ? 'Game Rating' : 'Avaliação do Jogo'} onChange={(e) => setFile(e.target.files)} />
+              <Input placeholder={language === 'en' ? 'Game Description' : 'Descrição do Jogo'} onChange={(e) => setFile(e.target.value)} />
+            </InputBox>
+            <PTitle>{language === 'en' ? 'Image Path' : 'Caminho da Imagem'}</PTitle>
+            <InputBox>
+              <Input onChange={(e) => setImg(e.target.value)} />
+            </InputBox>
+            <PTitle>{language === 'en' ? 'Background Image Path' : 'Caminho da Imagem de Fundo'}</PTitle>
+            <InputBox>
+              <Input onChange={(e) => setBg(e.target.value)} />
+            </InputBox>
+            <InputBox>
+              <Button onClick={gameRegister}>{language === 'en' ? 'Submit' : 'Enviar'}</Button>
+            </InputBox>
+          </Form>
+        </Div>
+      </Container>
+    </>
+  );
 }
+
+export default GameRegister;

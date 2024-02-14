@@ -1,7 +1,6 @@
 import './App.css';
 import React from 'react';
 import HomePage from './pages/home';
-import Register from './testPages/reg';
 import DeletePage from './pages/delete';
 import NavBar from './components/navBar';
 import SideBar from './components/sideBar';
@@ -24,7 +23,7 @@ function App() {
             <Route path='/delete' element={<DeletePage />} />
             <Route path='/home' element={<HomePage />} />
             <Route path='/game' element={<GameScreen />} />
-            <Route path='/gameregister' element={<Register />} />
+            <Route path='/gameregister' element={<GameRegister />} />
           </Routes>
         </AlertProvider>
       </TranslateProvider>
