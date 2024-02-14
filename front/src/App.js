@@ -22,7 +22,7 @@ function App() {
             <Route path='/login' element={<LoginSignUp />} />
             <Route path='/home' element={<HomePage />} />
             <Route path='/game' element={<GameScreen />} />
-            <Route path='/gameregister' element={<GameRegister />} />
+            <Route path='/gameregister' element={<Register />} />
           </Routes>
         </AlertProvider>
       </TranslateProvider>
