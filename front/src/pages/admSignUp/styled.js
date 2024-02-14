@@ -1,5 +1,14 @@
 import styled from "styled-components";
 
+export const Img = styled.img `
+    display: flex;
+    position: absolute;
+    z-index: -1;
+    object-fit: cover;
+    height: 100vh;
+    width: 100vw;
+`;
+
 export const Container = styled.div `
     display: flex;
     justify-content: center;
@@ -44,15 +53,9 @@ export const Form = styled.form `
 export const P = styled.p `
     font-size: 40px;
     background-color: lightgray;
-    width: 300px;
+    width: 190px;
     border-radius: 0px 0px 20px 20px;
     color: black;
-`;
-
-export const PTitle = styled.p `
-    font-size: 21px;
-    width: 300px;
-    color: lightgray;
 `;
 
 export const InputBox = styled.div `
@@ -105,6 +108,17 @@ export const Input = styled.input `
     }
 `;
 
+export const InputAdm = styled.input `
+    margin: 5px 5px 5px 5px;
+`;
+
+export const PTitle = styled.p `
+    font-size: 30px;
+    color: lightgray;
+    width: 190px;
+    color: black;
+`;
+
 export const Button = styled.button `
     border-radius: 20px 20px 0px 0px;
     border: none;
@@ -122,13 +136,4 @@ export const Button = styled.button `
     @media screen and (max-width: 400px) {
         width: 100%;
     }
-`;
-
-export const Img = styled.img `
-    display: flex;
-    position: absolute;
-    z-index: -1;
-    object-fit: cover;
-    height: 100vh;
-    width: 100vw;
 `;

@@ -147,7 +147,7 @@ export default function LoginSignUp() {
                 cards == 0 &&
                 <ContainerLogin>
                     <DivLogin>
-                        <PLogin>Login</PLogin>
+                        <PLogin>{language === 'en' ? 'Login' : 'Entrar'}</PLogin>
                         <FormLogin onSubmit={handleSubmitLogin}>
                             <InputBoxLogin>
                                 <InputLogin value={email} onChange={(e) => setEmail(e.target.value)} type='email' placeholder="Email" />
@@ -168,7 +168,7 @@ export default function LoginSignUp() {
                 cards == 1 &&
                 <ContainerSignUp>
                     <DivSignUp>
-                        <PSignUp>Sign Up</PSignUp>
+                        <PSignUp>{language === 'en' ? 'Sign Up' : 'Cadastrar'}</PSignUp>
                         <FormSignUp onSubmit={handleSubmitRegister}>
                             <InputBoxSignUp>
                                 <InputSignUp value={email} onChange={e => setEmail(e.target.value)} type='email' placeholder='Email' />
