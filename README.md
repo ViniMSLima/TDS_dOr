@@ -2,7 +2,7 @@
 
 FRONT
 
-- [ ] Translate
+- [X] Translate
 - [X] Home Screen
 - [ ] Ratings
 - [X] Sidebar
