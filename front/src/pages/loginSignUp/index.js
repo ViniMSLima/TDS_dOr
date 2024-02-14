@@ -1,20 +1,22 @@
 import axios from 'axios';
 import CryptoJS from 'crypto-js';
 import { SECRET } from '../../env';
+import { useState, useContext } from "react";
+import Bg from '../../assets/bgs/loginBg.png';
 import { useNavigate } from "react-router-dom";
 import { AlertContext } from '../../context/alert';
-import { useState, useContext } from "react";
+import { TranslateContext } from '../../context/translate';
 import {
-    Img, 
+    Img,
     ContainerLogin, DivLogin, FormLogin, InputBoxLogin, LinksLogin, ALogin, ButtonLogin, InputLogin, PLogin,
     ContainerSignUp, DivSignUp, FormSignUp, InputBoxSignUp, LinksSignUp, ASignUp, ButtonSignUp, InputSignUp, PSignUp
 } from './styled';
-import Bg from '../../assets/bgs/loginBg.png';
 
 export default function LoginSignUp() {
     const navigate = useNavigate();
-    const { setMessage, setShow, setVariant } = useContext(AlertContext);
     const [cards, setCards] = useState(0);
+    const { language } = useContext(TranslateContext);
+    const { setMessage, setShow, setVariant } = useContext(AlertContext);
     var [email, setEmail] = useState('');
     var [name, setName] = useState('');
     var [cpf, setCpf] = useState('');
@@ -148,14 +150,14 @@ export default function LoginSignUp() {
                         <PLogin>Login</PLogin>
                         <FormLogin onSubmit={handleSubmitLogin}>
                             <InputBoxLogin>
-                                <InputLogin value={email} onChange={(e) => setEmail(e.target.value)} type='email' placeholder='Email' />
-                                <InputLogin value={password} onChange={(e) => setPassword(e.target.value)} type='password' placeholder='Password' />
+                                <InputLogin value={email} onChange={(e) => setEmail(e.target.value)} type='email' placeholder="Email" />
+                                <InputLogin value={password} onChange={(e) => setPassword(e.target.value)} type='password' placeholder={language === 'en' ? 'Password' : 'Senha'} />
                             </InputBoxLogin>
                             <LinksLogin>
-                                <ALogin onClick={() => setCards(1)}>Sign Up</ALogin>
+                                <ALogin onClick={() => setCards(1)}>{language === 'en' ? 'Sign Up' : 'Cadastrar'}</ALogin>
                             </LinksLogin>
                             <InputBoxLogin>
-                                <ButtonLogin type='submit' />
+                                <ButtonLogin type='submit'>{language === 'en' ? 'Submit' : 'Enviar'}</ButtonLogin>
                             </InputBoxLogin>
                         </FormLogin>
                     </DivLogin>
@@ -170,17 +172,17 @@ export default function LoginSignUp() {
                         <FormSignUp onSubmit={handleSubmitRegister}>
                             <InputBoxSignUp>
                                 <InputSignUp value={email} onChange={e => setEmail(e.target.value)} type='email' placeholder='Email' />
-                                <InputSignUp value={name} onChange={e => setName(e.target.value)} type='Text' placeholder='Entire Name' />
+                                <InputSignUp value={name} onChange={e => setName(e.target.value)} type='Text' placeholder={language === 'en' ? 'Entire Name' : 'Nome Completo'} />
                                 <InputSignUp value={cpf} onChange={e => setCpf(e.target.value)} type='Text' placeholder='CPF' />
                                 <InputSignUp value={birthday} onChange={e => setBirthday(e.target.value)} type='Date' />
-                                <InputSignUp value={password} onChange={e => setPassword(e.target.value)} type='password' placeholder='Password' />
-                                <InputSignUp value={confirmPassword} onChange={e => setConfirmPassword(e.target.value)} type='password' placeholder='Confirm Password' />
+                                <InputSignUp value={password} onChange={e => setPassword(e.target.value)} type='password' placeholder={language === 'en' ? 'Password' : 'Senha'} />
+                                <InputSignUp value={confirmPassword} onChange={e => setConfirmPassword(e.target.value)} type='password' placeholder={language === 'en' ? 'Confirm Password' : ' Confirmar Senha'} />
                             </InputBoxSignUp>
                             <LinksSignUp>
-                                <ASignUp onClick={() => setCards(0)}>Login</ASignUp>
+                                <ASignUp onClick={() => setCards(0)}>{language === 'en' ? 'Login' : 'Entrar'}</ASignUp>
                             </LinksSignUp>
                             <InputBoxSignUp>
-                                <ButtonSignUp type='submit' />
+                                <ButtonSignUp type='submit'>{language === 'en' ? 'Submit' : 'Enviar'}</ButtonSignUp>
                             </InputBoxSignUp>
                         </FormSignUp>
                     </DivSignUp>

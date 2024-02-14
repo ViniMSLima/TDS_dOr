@@ -104,7 +104,7 @@ export const InputLogin = styled.input `
     }
 `;
 
-export const ButtonLogin = styled.input `
+export const ButtonLogin = styled.button `
     border-radius: 20px;
     border: none;
     width: 250px;
@@ -223,7 +223,7 @@ export const InputSignUp = styled.input `
     }
 `;
 
-export const ButtonSignUp = styled.input `
+export const ButtonSignUp = styled.button `
     border-radius: 20px 20px 0px 0px;
     border: none;
     width: 250px;
