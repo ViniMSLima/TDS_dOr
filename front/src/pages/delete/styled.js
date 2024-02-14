@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import deleteIcon from '../../assets/siteImages/icons/delete.png';
 
 export const Container = styled.div`
     background-color: #11001c;

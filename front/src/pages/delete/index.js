@@ -1,12 +1,14 @@
 import { Container, Card, Column, Row } from './styled';
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
 import axios from 'axios';
+import { jwtDecode } from "jwt-decode";
+import { useNavigate } from 'react-router-dom';
+
 
 export default function DeletePage() {
     const [games, setGames] = useState([]);
-
     const navigate = useNavigate();
+
 
     async function getGames() {
         try {
@@ -17,13 +19,46 @@ export default function DeletePage() {
         }
     }
 
-    function handleClick(id) {
-        sessionStorage.setItem('id', id)
-        navigate("/game")
+    async function handleClick(id) {
+        let isadm = isAdm();
+
+        if (isadm) {
+            const response = await fetch('http://localhost:8080/api/game/deletegame', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ id: id }),
+            });
+        } else {
+            alert("only adm's can delete games")
+        }
+
+        getGames();
+    }
+
+    async function isAdm() {
+        const token = sessionStorage.getItem('token');
+        const decodeToken = jwtDecode(token)
+
+        let id = decodeToken.id
+        const res = await axios.post('http://localhost:8080/api/user/isadm', {
+            id
+        });            
+
+        let resultado = res.data.is
+        return resultado
+    }
+
+    async function verify() {
+        let adm = await isAdm();
+        if(adm == false)
+            navigate("/home");
     }
 
     useEffect(() => {
-        getGames();
+            getGames();
+            verify();
     }, [])
 
     const RenderImages = () => {
@@ -31,7 +66,7 @@ export default function DeletePage() {
             return (
                 <Column key={gamy._id} onClick={() => handleClick(gamy._id)}>
                     <Card src={gamy.imgPath}>
-                        {gamy.name}
+                        Delete
                     </Card>
                 </Column>
             )

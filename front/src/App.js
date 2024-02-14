@@ -8,6 +8,7 @@ import SideBar from './components/sideBar';
 import GameScreen from './pages/gamescreen';
 import LoginSignUp from './pages/loginSignUp';
 import GameRegister from './pages/gameRegister';
+import Delete from './pages/delete';
 import { AlertProvider } from './context/alert';
 import { Route, Routes } from 'react-router-dom';
 import { TranslateProvider } from './context/translate';
@@ -25,6 +26,7 @@ function App() {
             <Route path='/home' element={<HomePage />} />
             <Route path='/game' element={<GameScreen />} />
             <Route path='/gameregister' element={<Register />} />
+            <Route path='/delete' element={<Delete />} />
           </Routes>
         </AlertProvider>
       </TranslateProvider>

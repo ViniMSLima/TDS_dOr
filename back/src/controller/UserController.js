@@ -93,6 +93,19 @@ class UserController {
 
     return res.status(200).send({ token: token });
   }
+
+  static async isAdm(req, res) {
+    const { id } = req.body;
+    try {
+      const user = await User.findById(id)
+      let is = false
+      if(user.isAdm)
+        is = true
+      return res.status(200).send({ is });
+    } catch (error) {
+      return res.status(404).send({ error: 'Game not found!' });
+    }
+  }
 }
 
 module.exports = UserController;

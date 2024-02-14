@@ -89,14 +89,15 @@ class GameController {
 
     try {
       const game = await Game.findById(id);
-      console.log(game.name);
       const games = await GameData.find({game: game.name});
-      // console.log(games);
-      games.forEach(async gameID => {
-        console.log(gameID.id)
-        const deletedGameData = await Game.findOneAndDelete({id: gameID.id});
+
+      games.forEach(async joguinho => {
+        console.log(joguinho.game);
+        const deleteGameParts = await GameData.findOneAndDelete({game: game.name});
       });
-      // const deletedGame = await Game.findByIdAndDelete(id).populate('gamePath');
+
+      const deleteGame = await Game.findByIdAndDelete(id);
+      
       return res.status(200).send({ message: "Game and GameData deleted!" });
     } catch (error) {
       return res.status(404).send({ error: 'Game not found!' });
