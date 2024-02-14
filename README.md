@@ -22,10 +22,13 @@ BACK
 FRONT 
 
 - [x] Game Description / Download Screen
-- [ ] Comments
+- [ ] Game screen comments
 - [x] Implement downloads .zip from BACK
-- [ ] Get the complete game info and it's .zip
-- [ ] Download the correct .zip for the requested game
+- [x] Get the complete game info and it's .zip
+- [x] Download the correct .zip for the requested game
+- [ ] Adm screen
+- [ ] Show all the games on adm screen
+- [ ] Delete games / adm screen
 
 BACK
 
@@ -38,6 +41,8 @@ BACK
 - [x] Get back the base64 string parts and put them together to convert it to .zip
 - [x] Send the zip file to the FRONT
 - [x] Delete the output.zip from BACK
+- [x] Get all the games in MongoDB
+- [ ] Delete a game in MongoDB (info and splited base64)
 
 ### Together
 
