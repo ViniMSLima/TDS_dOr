@@ -59,6 +59,7 @@ class GameController {
 
       res.status(201).send({ message: 'Game registered successfully' });
     } catch (error) {
+      console.log(error)
       return res.status(500).send({ message: 'Something failed while creating a game' });
     }
   }
