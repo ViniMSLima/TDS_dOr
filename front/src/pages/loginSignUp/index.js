@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 import { AlertContext } from '../../context/alert';
 import { TranslateContext } from '../../context/translate';
 import {
-    Img, 
+    Img,
     ContainerLogin, DivLogin, FormLogin, InputBoxLogin, LinksLogin, ALogin, ButtonLogin, InputLogin, PLogin,
     ContainerSignUp, DivSignUp, FormSignUp, InputBoxSignUp, LinksSignUp, ASignUp, ButtonSignUp, InputSignUp, PSignUp
 } from './styled';
@@ -157,7 +157,7 @@ export default function LoginSignUp() {
                                 <ALogin onClick={() => setCards(1)}>{language === 'en' ? 'Sign Up' : 'Cadastrar'}</ALogin>
                             </LinksLogin>
                             <InputBoxLogin>
-                                <ButtonLogin type='submit' />
+                                <ButtonLogin type='submit'>{language === 'en' ? 'Submit' : 'Enviar'}</ButtonLogin>
                             </InputBoxLogin>
                         </FormLogin>
                     </DivLogin>
@@ -182,7 +182,7 @@ export default function LoginSignUp() {
                                 <ASignUp onClick={() => setCards(0)}>{language === 'en' ? 'Login' : 'Entrar'}</ASignUp>
                             </LinksSignUp>
                             <InputBoxSignUp>
-                                <ButtonSignUp type='submit' />
+                                <ButtonSignUp type='submit'>{language === 'en' ? 'Submit' : 'Enviar'}</ButtonSignUp>
                             </InputBoxSignUp>
                         </FormSignUp>
                     </DivSignUp>
