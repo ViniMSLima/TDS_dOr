@@ -1,4 +1,4 @@
-import { Container, Card, Column, Row, Text, H1, Img, A } from './styled';
+import { Container, Card, Column, Row } from './styled';
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import logo1 from '../../assets/gameImages/logoAmelia.png';

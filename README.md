@@ -3,18 +3,19 @@
 FRONT
 
 - [ ] Translate
-- [ ] Home Screen
+- [X] Home Screen
 - [ ] Ratings
-- [ ] Sidebar
-- [ ] Login Screen 
-- [ ] Register Screen
-- [ ] Register new game screen 
+- [X] Sidebar
+- [X] Transform sidebar to a navbar
+- [X] Login Screen 
+- [X] Register Screen
+- [X] Responsive Screens (Home, Login/SignUp)
 
 BACK
 
 - [ ] Register games in MongoDB
-- [ ] Login User and ADM
-- [ ] Register User and ADM
+- [x] Login User and ADM
+- [x] Register User and ADM
 
 ### Vini
 

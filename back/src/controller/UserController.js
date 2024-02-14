@@ -7,17 +7,19 @@ require("dotenv").config();
 class UserController {
   static async register(req, res) {
 
-    // var bytes = CryptoJS.AES.decrypt(req.body.jsonCrypt, process.env.SECRET);
-    // const decryptd = bytes.toString(CryptoJS.enc.Utf8);
-    // const json = JSON.parse(decryptd);
+    var bytes = CryptoJS.AES.decrypt(req.body.jsonCrypt, process.env.SECRET);
+    const decryptd = bytes.toString(CryptoJS.enc.Utf8);
+    const json = JSON.parse(decryptd);
 
-    const { name, birth, email, password, confirmPassword, isAdm } = req.body;
-
-    if (!name) return res.status(400).json({ message: "Name is mandatory" });
+    const { email, cpf, name, birthday, password, confirmPassword, isAdm } = json;
 
     if (!email) return res.status(400).json({ message: "E-mail is mandatory" });
 
-    if (!birth) return res.status(400).json({ message: "Birth date is mandatory" });
+    if (!cpf) return res.status(400).json({ message: "CPF is mandatory" });
+
+    if (!name) return res.status(400).json({ message: "Name is mandatory" });
+
+    if (!birthday) return res.status(400).json({ message: "Birth date is mandatory" });
 
     if (!password)
       return res.status(400).json({ message: "Password is mandatory" });
@@ -36,9 +38,10 @@ class UserController {
     ).toString();
 
     const user = new User({
-      name,
-      birth,
       email,
+      cpf,
+      name,
+      birthday,
       isAdm,
       password: passwordCrypt,
       createdAt: Date.now(),
@@ -57,16 +60,19 @@ class UserController {
   }
 
   static async login(req, res) {
-    const { email, password } = req.body;
-    var decryptedEm = CryptoJS.AES.decrypt(email, "senhasecreta").toString(CryptoJS.enc.Utf8);
-    var decryptedPw = CryptoJS.AES.decrypt(password, "senhasecreta").toString(CryptoJS.enc.Utf8);
+    var decryptedEm = CryptoJS.AES.decrypt(req.body.jsonCrypt, process.env.SECRET).toString(CryptoJS.enc.Utf8);
+    const json = JSON.parse(decryptedEm);
+    const { email, password } = json;
 
-    const user = await User.findOne({ decryptedEm });
+    const user = await User.findOne({ email });
     if (!user)
       return res.status(400).send({ message: "Invalid Email or password" });
-    if (!(await bcrypt.compare(decryptedPw, user.password))) {
+
+    var decryptedPw = CryptoJS.AES.decrypt(user.password, process.env.SECRET).toString(CryptoJS.enc.Utf8);
+
+    if (password != decryptedPw)
       return res.status(400).send({ message: "Invalid Email or password" });
-    }
+
     const secret = process.env.SECRET;
     const token = jwt.sign(
       {

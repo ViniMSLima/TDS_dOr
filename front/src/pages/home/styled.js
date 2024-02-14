@@ -51,7 +51,7 @@ export const Card = styled.div`
 
     &:hover {
         transition:1s;
-        border-image: fill 0 linear-gradient(transparent, black);
+        filter: grayscale(80%);
         color: white;
         font-size: 40px;
         border-radius: 10%;
@@ -62,20 +62,4 @@ export const Img = styled.img`
     height: 200px;
     width: 200px;
     border-radius: 10%;
-`;
-
-export const Text = styled.div`
-    
-`;
-
-export const H1 = styled.h3`
-    
-`;
-
-export const P = styled.p`
-    
-`;
-
-export const A = styled.a`
-    
 `;
