@@ -7,7 +7,7 @@ import AdmSignUp from './pages/admSignUp';
 import SideBar from './components/sideBar';
 import GameScreen from './pages/gamescreen';
 import LoginSignUp from './pages/loginSignUp';
-import GameRegister from './pages/gameRegister';
+import Register from './pages/gameRegister';
 import Delete from './pages/delete';
 import { AlertProvider } from './context/alert';
 import { Route, Routes } from 'react-router-dom';
