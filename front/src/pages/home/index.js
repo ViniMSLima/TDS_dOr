@@ -19,7 +19,7 @@ export default function HomePage() {
 
     function handleClick(id) {
         sessionStorage.setItem('id', id)
-        navigate("/game")
+        navigate("/home/game")
     }
 
     useEffect(() => {
