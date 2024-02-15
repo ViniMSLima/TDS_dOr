@@ -22,11 +22,11 @@ function App() {
           <NavBar />
           <Routes>
             <Route path='/admregister' element={<AdmSignUp />} />
-            <Route path='/login' element={<LoginSignUp />} />
+            <Route path='/' element={<LoginSignUp />} />
             <Route path='/delete' element={<DeletePage />} />
             <Route path='/home' element={<HomePage />} />
             <Route path='/game' element={<GameScreen />} />
-            <Route path='/gameregister' element={<Register />} />
+            <Route path='/gameregister' element={<GameRegister />} />
             <Route path='/delete' element={<Delete />} />
           </Routes>
         </AlertProvider>

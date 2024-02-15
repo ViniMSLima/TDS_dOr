@@ -8,7 +8,7 @@ const unlink = promisify(fs.unlink);
 class GameController {
   static async create(req, res) {
     const { name, description, rating, imgPath, bgPath } = req.body;
-
+    
     if (!name || !description || !rating || !imgPath || !bgPath)
       return res.status(400).send({ message: 'Field\'s can\'t be empty' });
 
@@ -92,7 +92,6 @@ class GameController {
       const games = await GameData.find({game: game.name});
 
       games.forEach(async joguinho => {
-        console.log(joguinho.game);
         const deleteGameParts = await GameData.findOneAndDelete({game: game.name});
       });
 

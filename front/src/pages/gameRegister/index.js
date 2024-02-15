@@ -10,26 +10,25 @@ function GameRegister() {
   const [images, setImages] = useState([])
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
-  const [rating, setRating] = useState(0);
+  const [rating, setRating] = useState("");
   const [file, setFile] = useState("");
   const [bg, setBg] = useState("");
   const [img, setImg] = useState("");
 
-  async function gameRegister() {
+  async function gameRegister(e) {
+    e.preventDefault();
+    console.log(file)
     const formData = new FormData();
     formData.append('name', name);
     formData.append('description', description);
     formData.append('rating', rating);
     formData.append('bgPath', bg);
     formData.append('imgPath', img);
-    formData.append('gamePath', file);
-
+    formData.append('gamePath', file[0]);
+  
     try {
       const res = await fetch('http://localhost:8080/api/game/create', {
         method: 'POST',
-        headers: {
-          ...formData.getHeaders()
-        },
         body: formData
       });
       console.log(res);
@@ -37,7 +36,6 @@ function GameRegister() {
     catch (error) {
       console.log(error);
     }
-
   }
 
   return (
@@ -49,9 +47,9 @@ function GameRegister() {
           <Form>
             <InputBox>
               <Input type='file' onChange={(e) => setFile(e.target.files)} />
-              <Input placeholder={language === 'en' ? 'Game Name' : 'Nome do Jogo'} onChange={(e) => setFile(e.target.value)} />
-              <Input type='number' placeholder={language === 'en' ? 'Game Rating' : 'Avaliação do Jogo'} onChange={(e) => setFile(e.target.files)} />
-              <Input placeholder={language === 'en' ? 'Game Description' : 'Descrição do Jogo'} onChange={(e) => setFile(e.target.value)} />
+              <Input placeholder={language === 'en' ? 'Game Name' : 'Nome do Jogo'} onChange={(e) => setName(e.target.value)} />
+              <Input placeholder={language === 'en' ? 'Game Rating' : 'Avaliação do Jogo'} onChange={(e) => setRating(e.target.value)} />
+              <Input placeholder={language === 'en' ? 'Game Description' : 'Descrição do Jogo'} onChange={(e) => setDescription(e.target.value)} />
             </InputBox>
             <PTitle>{language === 'en' ? 'Image Path' : 'Caminho da Imagem'}</PTitle>
             <InputBox>
@@ -61,9 +59,7 @@ function GameRegister() {
             <InputBox>
               <Input onChange={(e) => setBg(e.target.value)} />
             </InputBox>
-            <InputBox>
               <Button onClick={gameRegister}>{language === 'en' ? 'Submit' : 'Enviar'}</Button>
-            </InputBox>
           </Form>
         </Div>
       </Container>
