@@ -4,7 +4,7 @@ import { saveAs } from 'file-saver';
 import React, { useEffect, useState, useContext } from 'react';
 import { Void } from '../../components/common/styled';
 import { TranslateContext } from '../../context/translate';
-import { Container, Game, GameInfo, Input, Text, GameTitle, CommentButton, GameName, GameRating, GameDescription, RatingSection, RatingLabel, CommentsSection, CommentsLabel, Comment, GameImage, DownloadButton, TextArea } from './styled';
+import { Container, Game, GameInfo, Text, GameTitle, GameName, GameRating, GameDescription, GameImage, DownloadButton} from './styled';
 
 
 function GameScreen() {
@@ -88,26 +88,6 @@ function GameScreen() {
               <DownloadButton onClick={downloadZip} disabled={loading}>{language === 'en' ? 'DOWNLOAD' : 'BAIXAR'}</DownloadButton>
           </div>
           <Void />
-        </Game>
-        <Game>
-          <CommentsSection>
-            <CommentsLabel>{language === 'en' ? 'COMMENTS' : 'COMENTARIOS'}</CommentsLabel>
-
-            <TextArea>
-              <Input />
-              <CommentButton>{language === 'en' ? 'COMMENT' : 'COMENTAR'}</CommentButton>
-            </TextArea>
-            <TextArea>
-              <Comment>This is a great game!</Comment>
-              <Comment>I can't wait for the sequel!</Comment>
-              <Comment>The graphics are amazing.</Comment>
-              <Comment>The graphics are amazing.</Comment>
-              <Comment>The graphics are amazing.</Comment>
-              <Comment>The graphics are amazing.</Comment>
-            </TextArea>
-            <Void />
-            <Void />
-          </CommentsSection>
         </Game>
       </Container>
     </>

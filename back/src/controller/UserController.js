@@ -87,7 +87,6 @@ class UserController {
 
     try {
       var decoded = jwt.verify(token, secret);
-      console.log(decoded.id)
     } catch (err) {
       return res.status(400).send({ message: 'Ta me tiranu menó?' });
     }
